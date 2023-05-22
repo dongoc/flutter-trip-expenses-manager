@@ -1,5 +1,6 @@
 class Trip {
-  final String id, title;
+  final int id;
+  final String title;
   final DateTime startDate;
   final DateTime? endDate;
 

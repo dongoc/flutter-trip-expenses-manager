@@ -1,36 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:trip_expenses_manager/screens/trip_form_screen.dart';
 
-import '../models/trip.dart';
+import '../static/trip_list.dart';
 import '../types/form.dart';
 import '../widgets/form/button.dart';
 import '../widgets/trip/trip_card.dart';
-
-List<Trip> tripList = [
-  Trip(
-    id: "1",
-    title: "경주 여행",
-    startDate: DateTime(2023, 6, 28),
-  ),
-  Trip(
-    id: "2",
-    title: "삿포로 여행",
-    startDate: DateTime(2023, 5, 22),
-    endDate: DateTime(2023, 5, 24),
-  ),
-  Trip(
-    id: "3",
-    title: "파리 여행",
-    startDate: DateTime(2023, 1, 24),
-    endDate: DateTime(2023, 2, 18),
-  ),
-  Trip(
-    id: "4",
-    title: "홍콩 여행",
-    startDate: DateTime(2022, 7, 9),
-    endDate: DateTime(2022, 7, 14),
-  ),
-];
 
 class TripListScreen extends StatelessWidget {
   const TripListScreen({super.key});

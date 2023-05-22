@@ -1,0 +1,86 @@
+import 'package:trip_expenses_manager/models/expense_category.dart';
+
+import '../models/expense.dart';
+
+List<Expense> expenses = [
+  Expense(
+    id: 1,
+    tripId: 1,
+    amount: 4000,
+    description: '초코 소라빵',
+    dateTime: DateTime(2023, 6, 25, 16, 20),
+    category: ExpenseCategoryKey.food,
+  ),
+  Expense(
+    id: 2,
+    tripId: 1,
+    amount: 493000,
+    description: '코모도 호텔',
+    dateTime: DateTime(2023, 6, 26, 20, 20),
+    category: ExpenseCategoryKey.hotel,
+  ),
+  Expense(
+    id: 3,
+    tripId: 1,
+    amount: 50000,
+    description: 'KTX 경주',
+    dateTime: DateTime(2023, 6, 27, 08, 2),
+    category: ExpenseCategoryKey.traffic,
+  ),
+  Expense(
+    id: 4,
+    tripId: 1,
+    amount: 4000,
+    description: '초코 소라빵',
+    dateTime: DateTime(2023, 6, 27, 11, 25),
+    category: ExpenseCategoryKey.food,
+  ),
+  Expense(
+    id: 5,
+    tripId: 1,
+    amount: 3000,
+    description: '석굴암 입장료',
+    dateTime: DateTime(2023, 6, 28, 13, 11),
+    category: ExpenseCategoryKey.tour,
+  ),
+  Expense(
+    id: 6,
+    tripId: 1,
+    amount: 100000,
+    description: '경주 굿즈',
+    dateTime: DateTime(2023, 6, 28, 15, 32),
+    category: ExpenseCategoryKey.shopping,
+  ),
+  Expense(
+    id: 7,
+    tripId: 1,
+    amount: 500,
+    description: '잃어버림',
+    dateTime: DateTime(2023, 6, 30, 11, 52),
+    category: ExpenseCategoryKey.etc,
+  ),
+  Expense(
+    id: 8,
+    tripId: 1,
+    amount: 4000,
+    description: '초코 소라빵',
+    dateTime: DateTime(2023, 7, 1, 11, 44),
+    category: ExpenseCategoryKey.food,
+  ),
+  Expense(
+    id: 9,
+    tripId: 1,
+    amount: 4000,
+    description: '초코 소라빵',
+    dateTime: DateTime(2023, 7, 2, 9, 32),
+    category: ExpenseCategoryKey.food,
+  ),
+  Expense(
+    id: 10,
+    tripId: 1,
+    amount: 4000,
+    description: '초코 소라빵',
+    dateTime: DateTime(2023, 7, 3, 9, 33),
+    category: ExpenseCategoryKey.food,
+  ),
+];
