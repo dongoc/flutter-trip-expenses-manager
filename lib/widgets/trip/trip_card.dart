@@ -15,7 +15,7 @@ class TripCard extends StatelessWidget {
   });
 
   String getPeriodText(DateTime startDate, DateTime? endDate) {
-    int period = endDate != null ? endDate.compareTo(startDate) + 1 : 1;
+    int period = trip.getTripPeriod();
     String formattedStartDate =
         formatDate(startDate, [yyyy, '년 ', mm, '월 ', dd, '일']);
     String? formattedEndDate = endDate != null

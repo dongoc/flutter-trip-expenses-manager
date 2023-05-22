@@ -10,4 +10,8 @@ class Trip {
     required this.startDate,
     this.endDate,
   });
+
+  int getTripPeriod() {
+    return endDate != null ? endDate!.difference(startDate).inDays + 1 : 1;
+  }
 }

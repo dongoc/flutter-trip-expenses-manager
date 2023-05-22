@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:trip_expenses_manager/models/expense.dart';
 
 import '../types/form.dart';
 import '../widgets/form/text_field.dart';
 
 class ExpenseFormScreen extends StatelessWidget {
   final FormType formType;
+  final Expense? expense;
 
   const ExpenseFormScreen({
     super.key,
     required this.formType,
+    this.expense,
   });
 
   @override
