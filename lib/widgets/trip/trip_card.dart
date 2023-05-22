@@ -15,13 +15,22 @@ class TripCard extends StatelessWidget {
   });
 
   String getPeriodText(DateTime startDate, DateTime? endDate) {
-    int period = endDate != null ? endDate.difference(startDate).inDays + 1 : 1;
+    int period = endDate != null ? endDate.compareTo(startDate) + 1 : 1;
     String formattedStartDate =
         formatDate(startDate, [yyyy, '년 ', mm, '월 ', dd, '일']);
     String? formattedEndDate = endDate != null
         ? formatDate(endDate, [yyyy, '년 ', mm, '월 ', dd, '일'])
         : null;
     return '$formattedStartDate${formattedEndDate != null ? ' ~ $formattedEndDate' : ''} ($period일)';
+  }
+
+  bool isOnTrip(DateTime startDate, DateTime? endDate) {
+    DateTime today = DateTime.now();
+
+    if (endDate != null) {
+      return startDate.isBefore(today) && endDate.isAfter(today);
+    }
+    return startDate.isAtSameMomentAs(today);
   }
 
   @override
@@ -37,6 +46,8 @@ class TripCard extends StatelessWidget {
             ));
       },
       child: Card(
+        color:
+            isOnTrip(trip.startDate, trip.endDate) ? Colors.blue : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
