@@ -64,7 +64,7 @@ class TripCard extends StatelessWidget {
                   : const Color.fromRGBO(56, 96, 255, 0.2),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(15, 30, 20, 35),
+              padding: const EdgeInsets.fromLTRB(15, 20, 20, 25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -18,15 +18,16 @@ class NavigatorButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
-          color: const Color.fromRGBO(56, 96, 255, 1),
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(238, 240, 249, 0.7),
-              offset: Offset(5, 5),
-              blurRadius: 30,
-            )
-          ]),
+        color: const Color.fromRGBO(56, 96, 255, 1),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(238, 240, 249, 0.7),
+            offset: Offset(5, 5),
+            blurRadius: 30,
+          )
+        ],
+      ),
       child: TextButton(
         onPressed: () {
           Navigator.push(

@@ -14,7 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '시니어 여행가계부',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: const Color.fromRGBO(56, 96, 255, 1),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromRGBO(56, 96, 255, 1),
+        ),
       ),
       home: const TripListScreen(),
     );

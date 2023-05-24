@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class FloatingButton extends StatelessWidget {
+class BasicButton extends StatelessWidget {
   final String text;
   final void Function() onPressed;
   final bool disabled;
 
-  const FloatingButton({
+  const BasicButton({
     super.key,
     required this.text,
     required this.onPressed,
@@ -14,11 +14,26 @@ class FloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
+      width: double.infinity,
+      height: 60,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 15,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+      ),
       child: TextButton(
         onPressed: disabled ? null : onPressed,
         style: const ButtonStyle(),
-        child: Text(text),
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+          ),
+        ),
       ),
     );
   }
