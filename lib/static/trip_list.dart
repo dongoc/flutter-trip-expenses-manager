@@ -11,7 +11,7 @@ List<Trip> tripList = [
     id: 2,
     title: "삿포로 여행",
     startDate: DateTime(2023, 5, 22),
-    endDate: DateTime(2023, 5, 24),
+    endDate: DateTime(2023, 5, 30),
   ),
   Trip(
     id: 3,

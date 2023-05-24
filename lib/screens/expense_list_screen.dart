@@ -3,6 +3,7 @@ import 'package:trip_expenses_manager/models/trip.dart';
 import 'package:trip_expenses_manager/screens/expense_form_screen.dart';
 import 'package:trip_expenses_manager/static/expense_list.dart';
 import 'package:trip_expenses_manager/types/form.dart';
+import 'package:trip_expenses_manager/widgets/form/navigator_button.dart';
 
 import '../models/expense.dart';
 import '../utils/formatter.dart';
@@ -83,16 +84,9 @@ class ExpenseListScreen extends StatelessWidget {
             ],
           )
       ]),
-      floatingActionButton: TextButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const ExpenseFormScreen(formType: FormType.create)));
-        },
-        style: const ButtonStyle(),
-        child: const Text('여행 목록'),
+      floatingActionButton: const NavigatorButton(
+        destinationScreen: ExpenseFormScreen(formType: FormType.create),
+        text: '여행 경비 추가하기',
       ),
     );
   }

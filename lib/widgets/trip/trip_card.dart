@@ -46,26 +46,53 @@ class TripCard extends StatelessWidget {
             ));
       },
       child: Card(
-        color:
-            isOnTrip(trip.startDate, trip.endDate) ? Colors.blue : Colors.white,
+        color: isOnTrip(trip.startDate, trip.endDate)
+            ? const Color.fromRGBO(56, 96, 255, 0.2)
+            : Colors.white,
+        shadowColor: const Color.fromRGBO(56, 96, 255, 0.2),
+        elevation: 30,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 35),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(trip.title),
-              Text(getPeriodText(trip.startDate, trip.endDate)),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const TripFormScreen(
-                            formType: FormType.update,
-                          ),
-                        ));
-                  },
-                  child: const Text('수정하기')),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    trip.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TripFormScreen(
+                              formType: FormType.update,
+                            ),
+                          ));
+                    },
+                    child: const Text(
+                      '수정하기',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 3),
+              Text(
+                getPeriodText(trip.startDate, trip.endDate),
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
             ],
           ),
         ),

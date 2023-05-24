@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trip_expenses_manager/screens/trip_form_screen.dart';
+import 'package:trip_expenses_manager/widgets/form/navigator_button.dart';
 
 import '../static/trip_list.dart';
 import '../types/form.dart';
@@ -13,34 +14,56 @@ class TripListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("여행 목록"),
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView.separated(
-          itemBuilder: (context, index) {
-            return TripCard(trip: tripList[index]);
-          },
-          separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: 2,
-            );
-          },
-          itemCount: tripList.length,
-        ),
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 80,
+            // decoration: const BoxDecoration(color: Colors.red),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '여행자님, 안녕하세요',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '새로운 여행을 떠나볼까요?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    // fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return TripCard(trip: tripList[index]);
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 5,
+                  );
+                },
+                itemCount: tripList.length,
+              ),
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: TextButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const TripFormScreen(formType: FormType.create),
-              ));
-        },
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.blue)),
-        // shape: const RoundedRectangleBorder(),
-        child: const Text('새로운 여행 추가하기'),
+      floatingActionButton: const NavigatorButton(
+        destinationScreen: TripFormScreen(formType: FormType.create),
+        text: '새로운 여행 추가하기',
       ),
     );
   }
