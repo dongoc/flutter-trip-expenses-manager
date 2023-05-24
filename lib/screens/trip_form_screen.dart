@@ -14,19 +14,21 @@ class TripFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("여행 ${formType == FormType.create ? '추가' : '수정'}하기"),
-        ),
-        body: Column(
-          children: const [
-            Input(label: "여행 제목"),
-            Input(label: "여행 기간"),
-          ],
-        ),
-        floatingActionButton: TextButton(
-          onPressed: () {},
-          style: const ButtonStyle(),
-          child: const Text('확인'),
-        ));
+      appBar: AppBar(
+        title: Text("여행 ${formType == FormType.create ? '추가' : '수정'}하기"),
+      ),
+      body: const Column(
+        children: [
+          Input(label: "여행 제목"),
+          Input(label: "여행 기간"),
+        ],
+      ),
+      floatingActionButton: TextButton(
+        onPressed: () {},
+        style: const ButtonStyle(),
+        child: const Text('확인'),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
   }
 }

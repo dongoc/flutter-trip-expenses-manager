@@ -14,9 +14,11 @@ class NavigatorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
-          color: Colors.red,
+          color: const Color.fromRGBO(56, 96, 255, 1),
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(

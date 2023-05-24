@@ -37,7 +37,6 @@ class TripListScreen extends StatelessWidget {
                   '새로운 여행을 떠나볼까요?',
                   style: TextStyle(
                     fontSize: 16,
-                    // fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
@@ -65,6 +64,7 @@ class TripListScreen extends StatelessWidget {
         destinationScreen: TripFormScreen(formType: FormType.create),
         text: '새로운 여행 추가하기',
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

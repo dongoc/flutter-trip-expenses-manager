@@ -46,55 +46,66 @@ class TripCard extends StatelessWidget {
             ));
       },
       child: Card(
-        color: isOnTrip(trip.startDate, trip.endDate)
-            ? const Color.fromRGBO(56, 96, 255, 0.2)
-            : Colors.white,
+        color: Colors.white,
         shadowColor: const Color.fromRGBO(56, 96, 255, 0.2),
         elevation: 30,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 30, 20, 35),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+        clipBehavior: Clip.hardEdge,
+        child: Row(
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              width: 15,
+              height: 120,
+              color: isOnTrip(trip.startDate, trip.endDate)
+                  ? const Color.fromRGBO(56, 96, 255, 1)
+                  : const Color.fromRGBO(56, 96, 255, 0.2),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 30, 20, 35),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    trip.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        trip.title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const TripFormScreen(
+                                  formType: FormType.update,
+                                ),
+                              ));
+                        },
+                        child: const Text(
+                          '수정하기',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ),
+                    ],
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TripFormScreen(
-                              formType: FormType.update,
-                            ),
-                          ));
-                    },
-                    child: const Text(
-                      '수정하기',
-                      style: TextStyle(fontSize: 14),
+                  const SizedBox(height: 3),
+                  Text(
+                    getPeriodText(trip.startDate, trip.endDate),
+                    style: const TextStyle(
+                      fontSize: 15,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 3),
-              Text(
-                getPeriodText(trip.startDate, trip.endDate),
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
