@@ -54,37 +54,35 @@ class ExpenseListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("${trip.title} 비용"),
       ),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          Text('총 ${formatNumberWithSeparator(getTotalAmount(expenses))} 원'),
-          for (var day = 0; day < tripPeriod + 2; day++)
-            Row(
-              children: [
-                DayBar(
-                  currentDay: day,
-                  period: tripPeriod,
-                  startDate: trip.startDate,
-                  totalAmount: getTotalAmount(filterExpensesByDay(
-                      day: day,
-                      startDate: trip.startDate,
-                      period: tripPeriod,
-                      expenses: expenses)),
-                ),
-                // ListView(
-                //   children: [
-                //     for (var expense in filterExpensesByDay(
-                //       day: day,
-                //       startDate: trip.startDate,
-                //       period: tripPeriod,
-                //       expenses: expenses,
-                //     ))
-                //       ExpenseItem(expense: expense)
-                //   ],
-                // ),
-              ],
-            )
-        ]),
-      ),
+      body: Column(children: [
+        Text('총 ${formatNumberWithSeparator(getTotalAmount(expenses))} 원'),
+        for (var day = 0; day < tripPeriod + 2; day++)
+          Row(
+            children: [
+              DayBar(
+                currentDay: day,
+                period: tripPeriod,
+                startDate: trip.startDate,
+                totalAmount: getTotalAmount(filterExpensesByDay(
+                    day: day,
+                    startDate: trip.startDate,
+                    period: tripPeriod,
+                    expenses: expenses)),
+              ),
+              // ListView(
+              //   children: [
+              //     for (var expense in filterExpensesByDay(
+              //       day: day,
+              //       startDate: trip.startDate,
+              //       period: tripPeriod,
+              //       expenses: expenses,
+              //     ))
+              //       ExpenseItem(expense: expense)
+              //   ],
+              // ),
+            ],
+          )
+      ]),
       floatingActionButton: TextButton(
         onPressed: () {
           Navigator.push(
