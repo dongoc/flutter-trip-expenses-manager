@@ -3,11 +3,10 @@ import 'package:trip_expenses_manager/models/trip.dart';
 import 'package:trip_expenses_manager/screens/expense_form_screen.dart';
 import 'package:trip_expenses_manager/static/expense_list.dart';
 import 'package:trip_expenses_manager/types/form.dart';
-import 'package:trip_expenses_manager/widgets/expense/day_bar.dart';
-import 'package:trip_expenses_manager/widgets/expense/expense_item.dart';
 
 import '../models/expense.dart';
 import '../utils/formatter.dart';
+import '../widgets/expense/day_bar.dart';
 
 class ExpenseListScreen extends StatelessWidget {
   final Trip trip;
@@ -71,16 +70,17 @@ class ExpenseListScreen extends StatelessWidget {
                       period: tripPeriod,
                       expenses: expenses)),
                 ),
-                ListView(
-                  children: [
-                    for (var expense in filterExpensesByDay(
-                        day: day,
-                        startDate: trip.startDate,
-                        period: tripPeriod,
-                        expenses: expenses))
-                      ExpenseItem(expense: expense)
-                  ],
-                ),
+                // ListView(
+                //   children: [
+                //     for (var expense in filterExpensesByDay(
+                //       day: day,
+                //       startDate: trip.startDate,
+                //       period: tripPeriod,
+                //       expenses: expenses,
+                //     ))
+                //       ExpenseItem(expense: expense)
+                //   ],
+                // ),
               ],
             )
         ]),
