@@ -11,14 +11,12 @@ import '../widgets/expense/day_bar.dart';
 
 class ExpenseListScreen extends StatelessWidget {
   final Trip trip;
-  late int tripPeriod;
+  int get tripPeriod => trip.getTripPeriod();
 
   ExpenseListScreen({
     super.key,
     required this.trip,
-  }) {
-    tripPeriod = trip.getTripPeriod();
-  }
+  });
 
   List<Expense> filterExpensesByDay({
     required int day,
