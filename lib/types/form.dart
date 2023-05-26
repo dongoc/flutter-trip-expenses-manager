@@ -1,0 +1,4 @@
+enum FormType {
+  create,
+  update,
+}
