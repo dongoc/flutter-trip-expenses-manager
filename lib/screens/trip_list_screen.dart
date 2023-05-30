@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:trip_expenses_manager/db/sqflite.dart';
 import 'package:trip_expenses_manager/screens/trip_form_screen.dart';
 import 'package:trip_expenses_manager/widgets/form/navigator_button.dart';
 
-import '../static/trip_list.dart';
+// import '../static/trip_list.dart';
+import '../models/trip.dart';
 import '../types/form.dart';
 import '../widgets/trip/trip_card.dart';
 
-class TripListScreen extends StatelessWidget {
+class TripListScreen extends StatefulWidget {
   const TripListScreen({super.key});
+
+  @override
+  State<TripListScreen> createState() => _TripListScreenState();
+}
+
+class _TripListScreenState extends State<TripListScreen> {
+  late List<Trip> tripList = [];
+  final TripDatabase _tripDatabase = TripDatabase();
+
+  Future _getTripList() async {
+    tripList = await _tripDatabase.getTripList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getTripList();
+  }
 
   @override
   Widget build(BuildContext context) {

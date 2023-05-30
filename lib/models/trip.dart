@@ -11,7 +11,22 @@ class Trip {
     this.endDate,
   });
 
+  Trip.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        title = json['title'],
+        startDate = json['start_date'],
+        endDate = json['end_date'];
+
   int getTripPeriod() {
     return endDate != null ? endDate!.difference(startDate).inDays + 1 : 1;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'start_date': startDate.toIso8601String(),
+      'end_date': endDate?.toIso8601String(),
+    };
   }
 }
