@@ -13,7 +13,7 @@ class ExpenseListScreen extends StatelessWidget {
   final Trip trip;
   int get tripPeriod => trip.getTripPeriod();
 
-  ExpenseListScreen({
+  const ExpenseListScreen({
     super.key,
     required this.trip,
   });
