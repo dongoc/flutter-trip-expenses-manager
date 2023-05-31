@@ -24,7 +24,7 @@ class BasicButton extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: disabled ? Colors.black26 : backgroundColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextButton(

@@ -2,6 +2,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:trip_expenses_manager/models/expense.dart';
 import 'package:trip_expenses_manager/models/trip.dart';
+import 'package:trip_expenses_manager/models/trip_form.dart';
 
 class TripDatabase {
   Future<Database> _openDb() async {
@@ -39,12 +40,18 @@ class TripDatabase {
     ''');
   }
 
-  Future<Trip> createTrip(trip) async {
+  Future<Trip> createTrip(TripForm tripForm) async {
     final db = await _openDb();
-    trip.id = await db.insert(
+    int id = await db.insert(
       'trips',
-      trip.toMap(),
+      tripForm.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    Trip trip = Trip(
+      id: id,
+      title: tripForm.title,
+      startDate: tripForm.startDate,
+      endDate: tripForm.endDate,
     );
     return trip;
   }
@@ -89,8 +96,10 @@ class TripDatabase {
       return Trip(
         id: maps[i]['id'],
         title: maps[i]['title'],
-        startDate: maps[i]['start_date'],
-        endDate: maps[i]['end_date'],
+        startDate: DateTime.parse(maps[i]['start_date']),
+        endDate: maps[i]['end_date'] != null
+            ? DateTime.parse(maps[i]['end_date'])
+            : null,
       );
     });
   }

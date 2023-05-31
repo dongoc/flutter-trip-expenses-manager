@@ -4,12 +4,14 @@ class Input extends StatelessWidget {
   final String label;
   final FormFieldSetter onSaved;
   final FormFieldValidator validator;
+  final String initialValue;
 
   const Input({
     super.key,
     required this.label,
     required this.onSaved,
     required this.validator,
+    this.initialValue = '',
   });
 
   @override
@@ -28,6 +30,7 @@ class Input extends StatelessWidget {
           keyboardType: TextInputType.text,
           onSaved: onSaved,
           validator: validator,
+          initialValue: initialValue,
           // inputFormatters: [],
           // onChanged: ,
         ),
