@@ -4,12 +4,14 @@ class BasicButton extends StatelessWidget {
   final String text;
   final void Function() onPressed;
   final bool disabled;
+  final Color backgroundColor;
 
   const BasicButton({
     super.key,
     required this.text,
     required this.onPressed,
     this.disabled = false,
+    this.backgroundColor = const Color.fromRGBO(56, 96, 255, 1),
   });
 
   @override
@@ -22,7 +24,8 @@ class BasicButton extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(20),
       ),
       child: TextButton(
         onPressed: disabled ? null : onPressed,

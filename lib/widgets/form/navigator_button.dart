@@ -31,10 +31,11 @@ class NavigatorButton extends StatelessWidget {
       child: TextButton(
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => destinationScreen,
-              ));
+            context,
+            MaterialPageRoute(
+              builder: (context) => destinationScreen,
+            ),
+          );
         },
         style: ButtonStyle(
           backgroundColor:
