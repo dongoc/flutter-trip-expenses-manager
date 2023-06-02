@@ -22,10 +22,33 @@ class ExpenseFormScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Input(label: "지출 금액"),
-          const Input(label: "지출 내역"),
-          const Input(label: "카테고리"),
-          const Input(label: "날짜 / 시간"),
+          Input(
+            label: "지출 금액",
+            onSaved: (val) {},
+            validator: (val) {
+              return null;
+            },
+          ),
+          Input(
+              label: "지출 내역",
+              onSaved: (val) {},
+              validator: (val) {
+                return null;
+              }),
+          Input(
+            label: "카테고리",
+            onSaved: (val) {},
+            validator: (val) {
+              return null;
+            },
+          ),
+          Input(
+            label: "날짜 / 시간",
+            onSaved: (val) {},
+            validator: (val) {
+              return null;
+            },
+          ),
           TextButton(onPressed: () {}, child: const Text('사진 추가'))
         ],
       ),

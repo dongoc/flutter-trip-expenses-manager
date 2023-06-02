@@ -16,4 +16,23 @@ class Expense {
     required this.dateTime,
     required this.category,
   });
+
+  Expense.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        tripId = json['trip_id'],
+        description = json['description'],
+        amount = json['amount'],
+        dateTime = json['date_time'],
+        category = json['category'];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'trip_id': tripId,
+      'description': description,
+      'amount': amount,
+      'date_time': dateTime.toIso8601String(),
+      'category': category,
+    };
+  }
 }
