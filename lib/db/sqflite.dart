@@ -92,8 +92,7 @@ class TripDatabase {
     final db = await _openDb();
     final List<Map<String, dynamic>> maps = await db.query('trips');
 
-    return List.generate(maps.length, (i) {
-      print(maps[i]['title']);
+    List<Trip> tripList = List.generate(maps.length, (i) {
       return Trip(
         id: maps[i]['id'],
         title: maps[i]['title'],
@@ -103,6 +102,10 @@ class TripDatabase {
             : null,
       );
     });
+
+    tripList.sort((a, b) => (b.startDate.compareTo(a.startDate)));
+
+    return tripList;
   }
 
   Future<Expense> getExpense(int id) async {
