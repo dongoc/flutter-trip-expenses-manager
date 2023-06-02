@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:trip_expenses_manager/models/trip_form.dart';
-import 'package:trip_expenses_manager/screens/expense_list_screen.dart';
+import 'package:trip_expenses_manager/screens/trip_list_screen.dart';
 import 'package:trip_expenses_manager/types/form.dart';
 import 'package:trip_expenses_manager/utils/formatter.dart';
 
@@ -30,12 +30,8 @@ class _TripFormScreenState extends State<TripFormScreen> {
   String title = '';
   DateTime? startDate, endDate;
 
-  Future<Trip> _createTrip() async {
-    Trip trip = await _tripDatabase.createTrip(TripForm(
-      title: title,
-      startDate: startDate!,
-      endDate: endDate,
-    ));
+  Future<Trip> _createTrip(TripForm tripForm) async {
+    Trip trip = await _tripDatabase.createTrip(tripForm);
     return trip;
   }
 
@@ -124,21 +120,25 @@ class _TripFormScreenState extends State<TripFormScreen> {
           ),
           Flexible(
             child: BasicButton(
-              disabled: title != '' && startDate != null,
+              disabled: !(title != '' && startDate != null),
               onPressed: () async {
                 // if (formKey.currentState != null &&
                 //     formKey.currentState!.validate() == true) {
                 //   print(formKey.currentState);
                 // }
                 if (title != '' && startDate != null) {
-                  Trip trip = await _createTrip();
+                  await _createTrip(TripForm(
+                    title: title,
+                    startDate: startDate!,
+                    endDate: endDate,
+                  ));
 
                   if (!mounted) return;
 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ExpenseListScreen(trip: trip),
+                      builder: (context) => const TripListScreen(),
                     ),
                   );
                 }

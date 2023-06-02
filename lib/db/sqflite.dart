@@ -93,6 +93,7 @@ class TripDatabase {
     final List<Map<String, dynamic>> maps = await db.query('trips');
 
     return List.generate(maps.length, (i) {
+      print(maps[i]['title']);
       return Trip(
         id: maps[i]['id'],
         title: maps[i]['title'],

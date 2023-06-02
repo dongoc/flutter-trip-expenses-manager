@@ -28,11 +28,10 @@ class Input extends StatelessWidget {
         ),
         TextFormField(
           keyboardType: TextInputType.text,
+          onChanged: onSaved,
           onSaved: onSaved,
           validator: validator,
           initialValue: initialValue,
-          // inputFormatters: [],
-          // onChanged: ,
         ),
         const SizedBox(height: 30)
       ],
