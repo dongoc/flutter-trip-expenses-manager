@@ -27,12 +27,52 @@ class TripFormScreen extends StatefulWidget {
 class _TripFormScreenState extends State<TripFormScreen> {
   final TripDatabase _tripDatabase = TripDatabase();
   final formKey = GlobalKey<FormState>();
+  int? id;
   String title = '';
   DateTime? startDate, endDate;
+  FormType formType = FormType.create;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      id = widget.initialTrip?.id;
+      title = widget.initialTrip != null ? widget.initialTrip!.title : '';
+      startDate = widget.initialTrip?.startDate;
+      endDate = widget.initialTrip?.endDate;
+      formType = widget.formType;
+    });
+  }
 
   Future<Trip> _createTrip(TripForm tripForm) async {
     Trip trip = await _tripDatabase.createTrip(tripForm);
     return trip;
+  }
+
+  Future<Trip> _updateTrip() async {
+    Trip trip = await _tripDatabase.updateTrip(Trip(
+      id: id!,
+      title: title,
+      startDate: startDate!,
+      endDate: endDate,
+    ));
+    return trip;
+  }
+
+  Future<int?> onDeleteTrip() async {
+    if (id != null) {
+      await _tripDatabase.deleteTrip(id!);
+
+      if (!mounted) return null;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const TripListScreen(),
+        ),
+      );
+    }
+    return null;
   }
 
   @override
@@ -46,6 +86,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
         child: Form(
           key: formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Input(
                 label: "여행 제목",
@@ -102,7 +143,21 @@ class _TripFormScreenState extends State<TripFormScreen> {
                 },
                 rangeStartDay: startDate,
                 rangeEndDay: endDate,
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              formType == FormType.update
+                  ? TextButton(
+                      onPressed: onDeleteTrip,
+                      child: const Text(
+                        '여행 삭제하기',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    )
+                  : const SizedBox(
+                      height: 20,
+                    )
             ],
           ),
         ),
