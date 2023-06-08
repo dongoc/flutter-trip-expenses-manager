@@ -22,11 +22,11 @@ class TripDatabase {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE IF NOT EXISTS trips
+      CREATE TABLE IF NOT EXISTS trips(
         id INTEGER PRIMARY KEY,
         title TEXT NOT NULL,
         start_date DATE NOT NULL,
-        end_date DATE
+        end_date DATE)
     ''');
 
     await db.execute('''
@@ -36,7 +36,7 @@ class TripDatabase {
         description TEXT NOT NULL,
         amount INTEGER NOT NULL,
         date_time DATE NOT NULL,
-        category TEXT
+        category TEXT)
     ''');
   }
 
