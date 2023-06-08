@@ -44,26 +44,15 @@ class _TripFormScreenState extends State<TripFormScreen> {
     });
   }
 
-  Future<Trip> _createTrip(TripForm tripForm) async {
-    Trip trip = await _tripDatabase.createTrip(tripForm);
-    return trip;
-  }
+  Future<void> onCreateTrip() async {
+    if (title != '' && startDate != null) {
+      await _tripDatabase.createTrip(TripForm(
+        title: title,
+        startDate: startDate!,
+        endDate: endDate,
+      ));
 
-  Future<Trip> _updateTrip() async {
-    Trip trip = await _tripDatabase.updateTrip(Trip(
-      id: id!,
-      title: title,
-      startDate: startDate!,
-      endDate: endDate,
-    ));
-    return trip;
-  }
-
-  Future<int?> onDeleteTrip() async {
-    if (id != null) {
-      await _tripDatabase.deleteTrip(id!);
-
-      if (!mounted) return null;
+      if (!mounted) return;
 
       Navigator.push(
         context,
@@ -72,7 +61,40 @@ class _TripFormScreenState extends State<TripFormScreen> {
         ),
       );
     }
-    return null;
+  }
+
+  Future<void> onUpdateTrip() async {
+    await _tripDatabase.updateTrip(Trip(
+      id: id!,
+      title: title,
+      startDate: startDate!,
+      endDate: endDate,
+    ));
+
+    if (!mounted) return;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const TripListScreen(),
+      ),
+    );
+  }
+
+  Future<void> onDeleteTrip() async {
+    if (id != null) {
+      await _tripDatabase.deleteTrip(id!);
+
+      if (!mounted) return;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const TripListScreen(),
+        ),
+      );
+    }
+    return;
   }
 
   @override
@@ -176,27 +198,8 @@ class _TripFormScreenState extends State<TripFormScreen> {
           Flexible(
             child: BasicButton(
               disabled: !(title != '' && startDate != null),
-              onPressed: () async {
-                // if (formKey.currentState != null &&
-                //     formKey.currentState!.validate() == true) {
-                //   print(formKey.currentState);
-                // }
-                if (title != '' && startDate != null) {
-                  await _createTrip(TripForm(
-                    title: title,
-                    startDate: startDate!,
-                    endDate: endDate,
-                  ));
-
-                  if (!mounted) return;
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TripListScreen(),
-                    ),
-                  );
-                }
+              onPressed: () {
+                formType == FormType.create ? onCreateTrip() : onUpdateTrip();
               },
               text: '확인',
             ),
