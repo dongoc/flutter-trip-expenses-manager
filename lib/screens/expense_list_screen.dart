@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:trip_expenses_manager/models/trip.dart';
 import 'package:trip_expenses_manager/screens/expense_form_screen.dart';
-import 'package:trip_expenses_manager/static/expense_list.dart';
 import 'package:trip_expenses_manager/types/form.dart';
 import 'package:trip_expenses_manager/widgets/form/navigator_button.dart';
 
 import '../models/expense.dart';
+import '../static/expense_list.dart';
 import '../utils/formatter.dart';
-import '../widgets/expense/day_bar.dart';
 
 class ExpenseListScreen extends StatelessWidget {
   final Trip trip;
@@ -17,6 +16,13 @@ class ExpenseListScreen extends StatelessWidget {
     super.key,
     required this.trip,
   });
+
+  // Future<List<Expense>> expenses =
+
+  // Future<List<Expense>> getExpenseList(Int tripId) async {
+  //   TripDatabase tripDatabase = TripDatabase();
+  //   // await tripDatabase.getExpenseList(trip.id);
+  // }
 
   List<Expense> filterExpensesByDay({
     required int day,
@@ -56,32 +62,35 @@ class ExpenseListScreen extends StatelessWidget {
       body: Column(
         children: [
           Text('총 ${formatNumberWithSeparator(getTotalAmount(expenses))} 원'),
-          for (var day = 0; day < tripPeriod + 2; day++)
-            Row(
-              children: [
-                DayBar(
-                  currentDay: day,
-                  period: tripPeriod,
-                  startDate: trip.startDate,
-                  totalAmount: getTotalAmount(filterExpensesByDay(
-                      day: day,
-                      startDate: trip.startDate,
-                      period: tripPeriod,
-                      expenses: expenses)),
-                ),
-                // ListView(
-                //   children: [
-                //     for (var expense in filterExpensesByDay(
-                //       day: day,
-                //       startDate: trip.startDate,
-                //       period: tripPeriod,
-                //       expenses: expenses,
-                //     ))
-                //       ExpenseItem(expense: expense)
-                //   ],
-                // ),
-              ],
-            )
+          // FutureBuilder(
+          // future:
+          // builder: (), {},)
+          // for (var day = 0; day < tripPeriod + 2; day++)
+          //   Row(
+          //     children: [
+          //       DayBar(
+          //         currentDay: day,
+          //         period: tripPeriod,
+          //         startDate: trip.startDate,
+          //         totalAmount: getTotalAmount(filterExpensesByDay(
+          //             day: day,
+          //             startDate: trip.startDate,
+          //             period: tripPeriod,
+          //             expenses: expenses)),
+          //       ),
+          //       // ListView(
+          //       //   children: [
+          //       //     for (var expense in filterExpensesByDay(
+          //       //       day: day,
+          //       //       startDate: trip.startDate,
+          //       //       period: tripPeriod,
+          //       //       expenses: expenses,
+          //       //     ))
+          //       //       ExpenseItem(expense: expense)
+          //       //   ],
+          //       // ),
+          //     ],
+          //   )
         ],
       ),
       floatingActionButton: const NavigatorButton(
