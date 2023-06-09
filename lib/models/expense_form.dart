@@ -29,7 +29,7 @@ class ExpenseForm {
       'description': description,
       'amount': amount,
       'date_time': dateTime.toIso8601String(),
-      'category': category,
+      'category': category.toString(),
     };
   }
 }

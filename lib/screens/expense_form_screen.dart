@@ -73,14 +73,22 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
               Input(
                 type: TextInputType.number,
                 label: "지출 금액",
-                onSaved: (val) {},
+                onSaved: (val) {
+                  setState(() {
+                    amount = int.parse(val);
+                  });
+                },
                 validator: (val) {
                   return null;
                 },
               ),
               Input(
                 label: "지출 내역",
-                onSaved: (val) {},
+                onSaved: (val) {
+                  setState(() {
+                    description = val;
+                  });
+                },
                 validator: (val) {
                   return null;
                 },
@@ -167,7 +175,7 @@ class _ExpenseFormScreenState extends State<ExpenseFormScreen> {
           ),
           Flexible(
             child: BasicButton(
-              onPressed: () {},
+              onPressed: onCreateExpense,
               text: '확인',
             ),
           ),
