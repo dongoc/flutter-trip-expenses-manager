@@ -17,7 +17,7 @@ class ExpenseListScreen extends StatelessWidget {
     required this.trip,
   });
 
-  // Future<List<Expense>> expenses =
+  // Future<List<Expense>> expenses
 
   // Future<List<Expense>> getExpenseList(Int tripId) async {
   //   TripDatabase tripDatabase = TripDatabase();
@@ -93,8 +93,11 @@ class ExpenseListScreen extends StatelessWidget {
           //   )
         ],
       ),
-      floatingActionButton: const NavigatorButton(
-        destinationScreen: ExpenseFormScreen(formType: FormType.create),
+      floatingActionButton: NavigatorButton(
+        destinationScreen: ExpenseFormScreen(
+          formType: FormType.create,
+          trip: trip,
+        ),
         text: '여행 경비 추가하기',
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

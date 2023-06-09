@@ -4,6 +4,8 @@ import 'package:trip_expenses_manager/models/expense.dart';
 import 'package:trip_expenses_manager/models/trip.dart';
 import 'package:trip_expenses_manager/models/trip_form.dart';
 
+import '../models/expense_form.dart';
+
 class TripDatabase {
   Future<Database> _openDb() async {
     final databasePath = await getDatabasesPath();
@@ -134,6 +136,23 @@ class TripDatabase {
         category: maps[i]['category'],
       );
     });
+  }
+
+  Future<Expense> createExpense(ExpenseForm expenseForm) async {
+    final db = await _openDb();
+    int id = await db.insert(
+      'expenses',
+      expenseForm.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    Expense expense = Expense(
+        id: id,
+        tripId: expenseForm.tripId,
+        amount: expenseForm.amount,
+        dateTime: expenseForm.dateTime,
+        description: expenseForm.description,
+        category: expenseForm.category);
+    return expense;
   }
 
   Future<Expense> updateExpense(Expense expense) async {
