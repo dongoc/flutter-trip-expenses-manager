@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class BasicButton extends StatelessWidget {
   final String text;
-  final void Function() onPressed;
+  final VoidCallback onPressed;
   final bool disabled;
   final Color backgroundColor;
 

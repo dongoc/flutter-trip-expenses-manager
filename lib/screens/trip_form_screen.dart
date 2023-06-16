@@ -27,12 +27,74 @@ class TripFormScreen extends StatefulWidget {
 class _TripFormScreenState extends State<TripFormScreen> {
   final TripDatabase _tripDatabase = TripDatabase();
   final formKey = GlobalKey<FormState>();
+  int? id;
   String title = '';
   DateTime? startDate, endDate;
+  FormType formType = FormType.create;
 
-  Future<Trip> _createTrip(TripForm tripForm) async {
-    Trip trip = await _tripDatabase.createTrip(tripForm);
-    return trip;
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      id = widget.initialTrip?.id;
+      title = widget.initialTrip != null ? widget.initialTrip!.title : '';
+      startDate = widget.initialTrip?.startDate;
+      endDate = widget.initialTrip?.endDate;
+      formType = widget.formType;
+    });
+  }
+
+  Future<void> onCreateTrip() async {
+    if (title != '' && startDate != null) {
+      await _tripDatabase.createTrip(TripForm(
+        title: title,
+        startDate: startDate!,
+        endDate: endDate,
+      ));
+
+      if (!mounted) return;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const TripListScreen(),
+        ),
+      );
+    }
+  }
+
+  Future<void> onUpdateTrip() async {
+    await _tripDatabase.updateTrip(Trip(
+      id: id!,
+      title: title,
+      startDate: startDate!,
+      endDate: endDate,
+    ));
+
+    if (!mounted) return;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const TripListScreen(),
+      ),
+    );
+  }
+
+  Future<void> onDeleteTrip() async {
+    if (id != null) {
+      await _tripDatabase.deleteTrip(id!);
+
+      if (!mounted) return;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const TripListScreen(),
+        ),
+      );
+    }
+    return;
   }
 
   @override
@@ -46,6 +108,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
         child: Form(
           key: formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Input(
                 label: "여행 제목",
@@ -102,7 +165,21 @@ class _TripFormScreenState extends State<TripFormScreen> {
                 },
                 rangeStartDay: startDate,
                 rangeEndDay: endDate,
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              formType == FormType.update
+                  ? TextButton(
+                      onPressed: onDeleteTrip,
+                      child: const Text(
+                        '여행 삭제하기',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    )
+                  : const SizedBox(
+                      height: 20,
+                    )
             ],
           ),
         ),
@@ -121,27 +198,8 @@ class _TripFormScreenState extends State<TripFormScreen> {
           Flexible(
             child: BasicButton(
               disabled: !(title != '' && startDate != null),
-              onPressed: () async {
-                // if (formKey.currentState != null &&
-                //     formKey.currentState!.validate() == true) {
-                //   print(formKey.currentState);
-                // }
-                if (title != '' && startDate != null) {
-                  await _createTrip(TripForm(
-                    title: title,
-                    startDate: startDate!,
-                    endDate: endDate,
-                  ));
-
-                  if (!mounted) return;
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TripListScreen(),
-                    ),
-                  );
-                }
+              onPressed: () {
+                formType == FormType.create ? onCreateTrip() : onUpdateTrip();
               },
               text: '확인',
             ),

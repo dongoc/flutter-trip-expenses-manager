@@ -5,6 +5,7 @@ class Input extends StatelessWidget {
   final FormFieldSetter onSaved;
   final FormFieldValidator validator;
   final String initialValue;
+  final TextInputType type;
 
   const Input({
     super.key,
@@ -12,6 +13,7 @@ class Input extends StatelessWidget {
     required this.onSaved,
     required this.validator,
     this.initialValue = '',
+    this.type = TextInputType.text,
   });
 
   @override
@@ -27,7 +29,7 @@ class Input extends StatelessWidget {
           ),
         ),
         TextFormField(
-          keyboardType: TextInputType.text,
+          keyboardType: type,
           onChanged: onSaved,
           onSaved: onSaved,
           validator: validator,

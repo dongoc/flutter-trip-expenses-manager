@@ -21,16 +21,18 @@ class _TripListScreenState extends State<TripListScreen> {
 
   Future _getTripList() async {
     tripList = await _tripDatabase.getTripList();
+    setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
-    _getTripList();
+    _getTripList(); // 비동기라서 못그릴 수도??
   }
 
   @override
   Widget build(BuildContext context) {
+    // async -> await (Future Builder)
     return Scaffold(
       appBar: AppBar(
         title: const Text("여행 목록"),

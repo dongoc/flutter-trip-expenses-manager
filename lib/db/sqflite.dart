@@ -4,6 +4,8 @@ import 'package:trip_expenses_manager/models/expense.dart';
 import 'package:trip_expenses_manager/models/trip.dart';
 import 'package:trip_expenses_manager/models/trip_form.dart';
 
+import '../models/expense_form.dart';
+
 class TripDatabase {
   Future<Database> _openDb() async {
     final databasePath = await getDatabasesPath();
@@ -22,11 +24,11 @@ class TripDatabase {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE IF NOT EXISTS trips
+      CREATE TABLE IF NOT EXISTS trips(
         id INTEGER PRIMARY KEY,
         title TEXT NOT NULL,
         start_date DATE NOT NULL,
-        end_date DATE
+        end_date DATE)
     ''');
 
     await db.execute('''
@@ -36,7 +38,7 @@ class TripDatabase {
         description TEXT NOT NULL,
         amount INTEGER NOT NULL,
         date_time DATE NOT NULL,
-        category TEXT
+        category TEXT)
     ''');
   }
 
@@ -92,8 +94,7 @@ class TripDatabase {
     final db = await _openDb();
     final List<Map<String, dynamic>> maps = await db.query('trips');
 
-    return List.generate(maps.length, (i) {
-      print(maps[i]['title']);
+    List<Trip> tripList = List.generate(maps.length, (i) {
       return Trip(
         id: maps[i]['id'],
         title: maps[i]['title'],
@@ -103,6 +104,10 @@ class TripDatabase {
             : null,
       );
     });
+
+    tripList.sort((a, b) => (b.startDate.compareTo(a.startDate)));
+
+    return tripList;
   }
 
   Future<Expense> getExpense(int id) async {
@@ -131,6 +136,23 @@ class TripDatabase {
         category: maps[i]['category'],
       );
     });
+  }
+
+  Future<Expense> createExpense(ExpenseForm expenseForm) async {
+    final db = await _openDb();
+    int id = await db.insert(
+      'expenses',
+      expenseForm.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    Expense expense = Expense(
+        id: id,
+        tripId: expenseForm.tripId,
+        amount: expenseForm.amount,
+        dateTime: expenseForm.dateTime,
+        description: expenseForm.description,
+        category: expenseForm.category);
+    return expense;
   }
 
   Future<Expense> updateExpense(Expense expense) async {
