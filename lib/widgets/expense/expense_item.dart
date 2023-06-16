@@ -2,7 +2,6 @@ import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:trip_expenses_manager/models/expense.dart';
 import 'package:trip_expenses_manager/screens/expense_form_screen.dart';
-import 'package:trip_expenses_manager/static/expense_categories.dart';
 
 import '../../models/trip.dart';
 import '../../types/form.dart';
@@ -35,13 +34,9 @@ class ExpenseItem extends StatelessWidget {
       child: Row(
         children: [
           Text(formatDate(expense.dateTime, [hh, ":", nn])),
-          Column(
-            children: [
-              Icon(categories[expense.category]!.icon),
-              Text(expense.description),
-              Text('${formatNumberWithSeparator(expense.amount)} 원')
-            ],
-          )
+          // Icon(categories[expense.category]!.icon),
+          Text(expense.description),
+          Text('${formatNumberWithSeparator(expense.amount)} 원')
         ],
       ),
     );
