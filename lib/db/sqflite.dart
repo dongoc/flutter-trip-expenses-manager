@@ -127,6 +127,7 @@ class TripDatabase {
     final List<Map<String, dynamic>> maps =
         await db.query('expenses', where: 'trip_id = ?', whereArgs: [tripId]);
 
+    // converter
     return List.generate(maps.length, (i) {
       return Expense(
         id: maps[i]['id'],
