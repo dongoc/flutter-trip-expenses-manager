@@ -5,6 +5,7 @@ import 'package:trip_expenses_manager/models/trip.dart';
 import 'package:trip_expenses_manager/models/trip_form.dart';
 
 import '../models/expense_form.dart';
+import '../utils/formatter.dart';
 
 class TripDatabase {
   Future<Database> _openDb() async {
@@ -132,8 +133,8 @@ class TripDatabase {
         tripId: maps[i]['trip_id'],
         description: maps[i]['description'],
         amount: maps[i]['amount'],
-        dateTime: maps[i]['date_time'],
-        category: maps[i]['category'],
+        dateTime: DateTime.parse(maps[i]['date_time']),
+        category: stringToExpenseCategoryKey(maps[i]['category']),
       );
     });
   }
